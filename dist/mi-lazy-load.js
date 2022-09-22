@@ -1,6 +1,8 @@
 const MILazyLoader = {
     init: (targetClass = "lazy-load", loadedClass = "lazy-loaded") => {
+        const captureClass = "lazy-capture";
         const ObserveImages = images => {
+            if (images.length === 0) return;
             console.log(images);
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(({
@@ -17,19 +19,24 @@ const MILazyLoader = {
                 });
             });
             images.forEach(img => {
-                img.classList.remove(targetClass);
+                img.classList.remove(targetClass, captureClass);
                 imageObserver.observe(img);
             });
         };
-        ObserveImages(Array.from(document.querySelectorAll(`img.${targetClass}:not(.${loadedClass})`)));
+        const FilteredElems = _target => {
+            let __elems = _target.querySelectorAll(`img.${targetClass}:not(.${captureClass}):not(.${loadedClass})`);
+            __elems.forEach(elem => elem.classList.add(captureClass));
+            return __elems;
+        };
+        let initialElems = FilteredElems(document);
+        ObserveImages(initialElems);
         let observer = new MutationObserver(mutations => {
             let elems = [];
             mutations.forEach(mutation => {
                 mutation.addedNodes.forEach(node => {
-                    if (node.classList.contains(targetClass) && !node.classList.contains(loadedClass)) {
-                        console.log("MIL FOUND", node);
-                        elems.push(node);
-                    }
+                    if (node.nodeType !== 1) return;
+                    let mutatedElems = FilteredElems(node);
+                    elems.push(...mutatedElems);
                 });
             });
             ObserveImages(elems);

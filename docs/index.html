@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../src/main.js"></script>
+    <script src="react.js"></script>
+</head>
+
+<body>
+    <script>
+        MILazyLoader.init("lazyload")
+    </script>
+
+    <div id="target"></div>
+
+    <script>
+        const { useState, useEffect, useRef, useCallback, createElement } = React;
+
+        const root = ReactDOM.createRoot(document.getElementById("target"));
+
+        let App = () => {
+            return createElement(
+                "div",
+                null,
+                "hi",
+                createElement(
+                    "img",
+                    { "data-src": "200.png", className: "lazyload" }
+                )
+            )
+        }
+
+
+        root.render(createElement(App))
+    </script>
+</body>
+
+</html>
