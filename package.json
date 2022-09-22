@@ -4,7 +4,7 @@
   "description": "Lazy-load images using Mutation &amp; Intersection Observers.",
   "main": "index.js",
   "scripts": {
-    "minify": "yarn uglifyjs src/main.js -o dist/mi-lazy-load.min.js -c -m",
+    "minify": "yarn uglifyjs src/main.js -o dist/mi-lazy-load.min.js -c drop_console=true -m",
     "copy": "yarn uglifyjs src/main.js -o dist/mi-lazy-load.min.js -b"
   },
   "repository": {
