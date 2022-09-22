@@ -1,0 +1,24 @@
+{
+  "name": "mi-lazy-load",
+  "version": "0.0.1",
+  "description": "Lazy-load images using Mutation &amp; Intersection Observers.",
+  "main": "index.js",
+  "scripts": {
+    "minify": "yarn uglifyjs src/main.js -o dist/mi-lazy-load.min.js -c -m",
+    "copy": "yarn uglifyjs src/main.js -o dist/mi-lazy-load.min.js -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohangaikwad/mi-lazy-load.git"
+  },
+  "keywords": [],
+  "author": "Rohan Gaikwad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohangaikwad/mi-lazy-load/issues"
+  },
+  "homepage": "https://github.com/rohangaikwad/mi-lazy-load#readme",
+  "dependencies": {
+    "uglify-js": "^3.17.1"
+  }
+}
